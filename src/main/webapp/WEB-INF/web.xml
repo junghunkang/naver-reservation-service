@@ -10,7 +10,7 @@
 	</context-param>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>kr.or.connect.guestbook.config.ApplicationConfig
+		<param-value>kr.or.connect.reservation.config.ApplicationConfig
 		</param-value>
 	</context-param>
 	<listener>
@@ -29,7 +29,7 @@
 		</init-param>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>kr.or.connect.guestbook.config.WebMvcContextConfiguration
+			<param-value>kr.or.connect.reservation.config.WebMvcContextConfiguration
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
