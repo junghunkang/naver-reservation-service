@@ -1,5 +1,6 @@
 package kr.or.connect.reservation.dao;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -24,4 +25,9 @@ public class CategoryDao {
 	public List<Category> selectAll() {
 		return jdbc.query(SELECT_ALL, rowMapper);
 	}
+	
+	public int getCount() {
+		return jdbc.queryForObject(GET_COUNT,Integer.class);
+	}
+	
 }

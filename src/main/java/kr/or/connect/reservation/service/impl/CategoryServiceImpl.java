@@ -22,5 +22,11 @@ public class CategoryServiceImpl implements CategoryService{
 		List<Category> list = categoryDao.selectAll();
 		return list;
 	}
+
+	@Override
+	@Transactional
+	public int getCount() {
+		return categoryDao.getCount();
+	}
 	
 }

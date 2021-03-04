@@ -4,6 +4,14 @@ package kr.or.connect.reservation.dto;
 public class Category {
 	private int id;
 	private String name;
+	int count;
+	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public int getId() {
 		return id;
 	}
@@ -19,6 +27,8 @@ public class Category {
 	
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + "]";
+		return "Category [id=" + id + ", name=" + name + ", count=" + count + "]";
 	}
+	
+	
 }

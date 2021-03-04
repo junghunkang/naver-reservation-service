@@ -21,9 +21,11 @@ public class CategoryController {
 	@GetMapping
 	public Map<String,Object> list(){
 		
+		int count = categoryService.getCount();
 		List<Category> list = categoryService.categories();
 		Map<String, Object> map = new HashMap<>();
-		map.put("list", list);
+		map.put("size",count);
+		map.put("item", list);
 		
 		return map;
 	}
