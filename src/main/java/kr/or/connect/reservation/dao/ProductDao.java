@@ -13,7 +13,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.or.connect.reservation.dto.DisplayInfoImage;
 import kr.or.connect.reservation.dto.Product;
+import kr.or.connect.reservation.dto.ProductImage;
+import kr.or.connect.reservation.dto.ProductPrice;
+
 import static kr.or.connect.reservation.dao.ProductDaoSqls.*;
 
 
@@ -21,6 +25,10 @@ import static kr.or.connect.reservation.dao.ProductDaoSqls.*;
 public class ProductDao {
 	private NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Product> rowMapper = BeanPropertyRowMapper.newInstance(Product.class);
+	private RowMapper<ProductImage> imgRowMapper = BeanPropertyRowMapper.newInstance(ProductImage.class);
+	private RowMapper<DisplayInfoImage> disImgRowMapper = BeanPropertyRowMapper.newInstance(DisplayInfoImage.class);
+	private RowMapper<ProductPrice> prodPriRowMapper = BeanPropertyRowMapper.newInstance(ProductPrice.class);
+	
 	
 	public ProductDao(DataSource datasource) {
 		this.jdbc = new NamedParameterJdbcTemplate(datasource);
@@ -37,5 +45,28 @@ public class ProductDao {
 		return jdbc.queryForObject(GET_COUNT,Collections.emptyMap(), Integer.class);
 	}
 	
+	public Product selectById(int id) {
+		Map<String,?> params = Collections.singletonMap("id", id);
+		return jdbc.queryForObject(SELECT_BY_ID,params,rowMapper);
+	}
 	
+	public List<ProductImage> selectProdImgById(int id) {
+		Map<String,?> params = Collections.singletonMap("id",id);
+		return jdbc.query(SELECT_IMAGE_BY_ID,params,imgRowMapper);
+	}
+	
+	public List<DisplayInfoImage> selectDisInfoImgById(int id){
+		Map<String,?> params = Collections.singletonMap("id",id);
+		return jdbc.query(SELECT_DISPLAY_INFO_IMAGE_BY_ID, params, disImgRowMapper);
+	}
+	
+	public double selectAvgScoreById(int id) {
+		Map<String,?> params = Collections.singletonMap("id",id);
+		return jdbc.queryForObject(SELECT_AVG_SCORE,params, Double.class);
+	}
+	
+	public List<ProductPrice> selectProdPriceById(int id){
+		Map<String,?> params = Collections.singletonMap("id",id);
+		return jdbc.query(SELECT_PRICE_BY_ID, params, prodPriRowMapper);
+	}
 }
