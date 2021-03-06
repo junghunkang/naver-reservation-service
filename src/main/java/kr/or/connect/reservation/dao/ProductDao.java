@@ -17,6 +17,7 @@ import kr.or.connect.reservation.dto.DisplayInfoImage;
 import kr.or.connect.reservation.dto.Product;
 import kr.or.connect.reservation.dto.ProductImage;
 import kr.or.connect.reservation.dto.ProductPrice;
+import kr.or.connect.reservation.dto.ReservationUserComment;
 
 import static kr.or.connect.reservation.dao.ProductDaoSqls.*;
 
@@ -28,7 +29,7 @@ public class ProductDao {
 	private RowMapper<ProductImage> imgRowMapper = BeanPropertyRowMapper.newInstance(ProductImage.class);
 	private RowMapper<DisplayInfoImage> disImgRowMapper = BeanPropertyRowMapper.newInstance(DisplayInfoImage.class);
 	private RowMapper<ProductPrice> prodPriRowMapper = BeanPropertyRowMapper.newInstance(ProductPrice.class);
-	
+	private RowMapper<ReservationUserComment> commentRowMapper = BeanPropertyRowMapper.newInstance(ReservationUserComment.class);
 	
 	public ProductDao(DataSource datasource) {
 		this.jdbc = new NamedParameterJdbcTemplate(datasource);
@@ -68,5 +69,17 @@ public class ProductDao {
 	public List<ProductPrice> selectProdPriceById(int id){
 		Map<String,?> params = Collections.singletonMap("id",id);
 		return jdbc.query(SELECT_PRICE_BY_ID, params, prodPriRowMapper);
+	}
+	public List<ReservationUserComment> selectReserUserCommentById(Integer start, Integer limit, int id){
+		Map<String,Integer> params = new HashMap<>();
+		params.put("id", id);
+		params.put("start", start);
+		params.put("limit", limit);
+	
+		return jdbc.query(SELECT_COMMENT_BY_ID, params, commentRowMapper);
+	}
+	public int selectCommentCountByProdId(int id) {
+		Map<String,?> params = Collections.singletonMap("id",id);
+		return jdbc.queryForObject(SELECT_COMMENT_COUNT_BY_ID,params,Integer.class);
 	}
 }

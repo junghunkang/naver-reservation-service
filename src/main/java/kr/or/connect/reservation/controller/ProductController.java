@@ -15,6 +15,7 @@ import kr.or.connect.reservation.dto.DisplayInfoImage;
 import kr.or.connect.reservation.dto.Product;
 import kr.or.connect.reservation.dto.ProductImage;
 import kr.or.connect.reservation.dto.ProductPrice;
+import kr.or.connect.reservation.dto.ReservationUserComment;
 import kr.or.connect.reservation.service.ProductService;
 
 @RestController
@@ -24,7 +25,7 @@ public class ProductController {
 	ProductService productService;
 	
 	@GetMapping
-	public Map<String,Object> list(@RequestParam(name="start", required=false, defaultValue = "0")int start){
+	public Map<String,Object> list(@RequestParam(name="start", defaultValue = "0")int start){
 		List<Product> list = productService.products(start);
 		int totalCount = productService.getCount();
 		int productCount = list.size();
@@ -33,6 +34,18 @@ public class ProductController {
 		map.put("products",list);
 		map.put("totalCount", totalCount);
 		map.put("productCount", productCount);
+		return map;
+	}
+	
+	@GetMapping("/comment")
+	public Map<String,Object> userComment(@RequestParam(name="start",defaultValue = "0")int start, @RequestParam(name="productId", defaultValue="1")int productId){
+		int totalCount = productService.getCommentCountById(productId);
+		List<ReservationUserComment> list = productService.getUserCommentByProdId(start, productId);
+		int commentCount = list.size();
+		Map<String,Object> map = new HashMap<>();
+		map.put("totalCount", totalCount);
+		map.put("commentCount",commentCount);
+		map.put("reservationUserComments", list);
 		return map;
 	}
 	
@@ -51,4 +64,6 @@ public class ProductController {
 		map.put("productPrices",productPrices);
 		return map;
 	}
+	
+	
 }

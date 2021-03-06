@@ -11,6 +11,7 @@ import kr.or.connect.reservation.dto.DisplayInfoImage;
 import kr.or.connect.reservation.dto.Product;
 import kr.or.connect.reservation.dto.ProductImage;
 import kr.or.connect.reservation.dto.ProductPrice;
+import kr.or.connect.reservation.dto.ReservationUserComment;
 import kr.or.connect.reservation.service.ProductService;
 
 
@@ -63,6 +64,17 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<ProductPrice> getProdPrice(int id) {
 		return productDao.selectProdPriceById(id);
+	}
+
+	@Transactional
+	@Override
+	public List<ReservationUserComment> getUserCommentByProdId(Integer start, int id) {
+		return productDao.selectReserUserCommentById(start, ProductService.COMMENT_LIMIT, id);
+	}
+
+	@Override
+	public int getCommentCountById(int id) {
+		return productDao.selectCommentCountByProdId(id);
 	}
 
 }

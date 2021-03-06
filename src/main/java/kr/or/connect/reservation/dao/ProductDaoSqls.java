@@ -38,4 +38,16 @@ public class ProductDaoSqls {
 			+ "from display_info\n"
 			+ "where id = :id) as A join product on (A.product_id = product.id)\n"
 			+ ") as B join (product_price) on( B.product_id = product_price.product_id);";
+	
+	public static final String SELECT_COMMENT_BY_ID ="select reservation_user_comment.id, product_id, reservation_info_id,score, reservation_email,comment\n"
+			+ "from reservation_user_comment join (select reservation_info.id, display_info_id, product_id, reservation_email\n"
+			+ "from reservation_info join display_info on (display_info.id = reservation_info.display_info_id)\n"
+			+ "where product_id = :id) as A on (reservation_info_id = A.id)\n"
+			+ "limit :start, :limit;";
+	
+	public static final String SELECT_COMMENT_COUNT_BY_ID = "select count(*)\n"
+			+ "from (select reservation_info.id, product_id\n"
+			+ "from reservation_info join display_info on (reservation_info.display_info_id = display_info.id)\n"
+			+ "where product_id = 1) as A join reservation_user_comment on (A.id = reservation_info_id)";
+
 }
