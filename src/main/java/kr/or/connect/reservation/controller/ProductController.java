@@ -19,7 +19,7 @@ import kr.or.connect.reservation.dto.ReservationUserComment;
 import kr.or.connect.reservation.service.ProductService;
 
 @RestController
-@RequestMapping(path="/displayinfos")
+@RequestMapping(path="/api/displayinfos")
 public class ProductController {
 	@Autowired
 	ProductService productService;

@@ -13,7 +13,7 @@ import kr.or.connect.reservation.dto.Category;
 import kr.or.connect.reservation.service.CategoryService;
 
 @RestController
-@RequestMapping(path = "/categories")
+@RequestMapping(path = "/api/categories")
 public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
