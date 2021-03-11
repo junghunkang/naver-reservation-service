@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.connect.reservation.dto.ReservationInfo;
+import kr.or.connect.reservation.argumentresolver.HeaderInfo;
 import kr.or.connect.reservation.dto.DisplayInfoImage;
 import kr.or.connect.reservation.dto.Product;
 import kr.or.connect.reservation.dto.ProductImage;
@@ -29,7 +30,7 @@ public class ProductController {
 	ProductService productService;
 	
 	@GetMapping
-	public Map<String,Object> list(@RequestParam(name="start", defaultValue = "0")int start){
+	public Map<String,Object> list(@RequestParam(name="start", defaultValue = "0")int start, HeaderInfo headerInfo){
 		List<Product> list = productService.products(start);
 		int totalCount = productService.getCount();
 		int productCount = list.size();
@@ -38,6 +39,7 @@ public class ProductController {
 		map.put("products",list);
 		map.put("totalCount", totalCount);
 		map.put("productCount", productCount);
+		System.out.println(headerInfo.get("user-agent"));
 		return map;
 	}
 	
