@@ -9,5 +9,6 @@ public interface ReservationService {
 	public int addReservationInfo(ReservationInfo reservationInfo);
 	public ReservationInfo getReservationInfo(int reservationInfoId);
 	public List<Reservation> getReservationInfoByLoginId(String loginId);
+	public String cancelReservation(int reservationId);
 	
 }

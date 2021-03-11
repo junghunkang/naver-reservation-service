@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +44,15 @@ public class ReservationController {
 		Map<String,Object> map = new HashMap<>();
 		map.put("items",list);
 		map.put("size", size);
+		return map;
+	}
+	
+	@PutMapping
+	public Map<String,Object> updateReservation(@RequestBody Map<String,Integer> params){
+		Integer reservationId = params.get("id");
+		String result = reservationService.cancelReservation(reservationId);
+		Map<String,Object> map = new HashMap<>();
+		map.put("result", result);
 		return map;
 	}
 	

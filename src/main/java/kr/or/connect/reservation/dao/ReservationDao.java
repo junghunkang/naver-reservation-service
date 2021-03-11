@@ -59,4 +59,13 @@ public class ReservationDao {
 		Map<String,?> params = Collections.singletonMap("email",loginId);
 		return jdbc.query(SELECT_RESERVATION_BY_EMAIL, params, resInfoRowMapper);
 	}
+	public String updateReservationInfo(int reservationId) {
+		Map<String,?> params = Collections.singletonMap("reservationId",reservationId);
+		try {
+			jdbc.update(UPDATE_RESERVATION_BY_ID, params);
+			return "true";
+		}catch(Exception e) {
+			return "false";
+		}
+	}
 }

@@ -69,4 +69,5 @@ public class ProductDaoSqls {
 			+ "group by (reservation_info_id)) as D join reservation_info on (reservation_info_id = reservation_info.id)) as reservation_info join (select id as user_id\n"
 			+ "from member\n"
 			+ "where email = :email) as A on (reservation_info.user_id = A.user_id)) as B join display_info on (display_info.id = B.display_info_id)) as E join product  on (E.product_id = product.id);";
+	public static final String UPDATE_RESERVATION_BY_ID = "UPDATE `reservation`.`reservation_info` SET `cancel_flag` = '1' WHERE (`id` = :reservationId);";
 }

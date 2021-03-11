@@ -48,6 +48,11 @@ public class ReservationServiceImpl implements ReservationService{
 		return list;
 	}
 
+	@Override
+	public String cancelReservation(int reservationId) {
+		return reservationDao.updateReservationInfo(reservationId);
+	}
+
 	
 	
 
