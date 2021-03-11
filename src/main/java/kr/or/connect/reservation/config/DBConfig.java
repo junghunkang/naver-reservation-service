@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @EnableTransactionManagement
 public class DBConfig implements TransactionManagementConfigurer{
 	
-	private String driverClassName = "com.mysql.jdbc.Driver";
+	private String driverClassName = "com.mysql.cj.jdbc.Driver";
 
 	private String url = "jdbc:mysql://localhost:3306/reservation?serverTimezone=UTC";
 

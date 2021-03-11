@@ -2,8 +2,7 @@
 
 <web-app>
 	<display-name>Archetype Created Web Application</display-name>
-
-	<context-param>
+<!-- 	<context-param>
 		<param-name>contextClass</param-name>
 		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext
 		</param-value>
@@ -39,7 +38,7 @@
 		<servlet-name>mvc</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
+ -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter

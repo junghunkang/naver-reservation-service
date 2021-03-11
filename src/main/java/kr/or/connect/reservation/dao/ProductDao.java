@@ -10,13 +10,18 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import kr.or.connect.reservation.dto.DisplayInfoImage;
+import kr.or.connect.reservation.dto.Price;
 import kr.or.connect.reservation.dto.Product;
 import kr.or.connect.reservation.dto.ProductImage;
 import kr.or.connect.reservation.dto.ProductPrice;
+import kr.or.connect.reservation.dto.ReservationInfo;
 import kr.or.connect.reservation.dto.ReservationUserComment;
 
 import static kr.or.connect.reservation.dao.ProductDaoSqls.*;
@@ -25,14 +30,18 @@ import static kr.or.connect.reservation.dao.ProductDaoSqls.*;
 @Repository
 public class ProductDao {
 	private NamedParameterJdbcTemplate jdbc;
+	private SimpleJdbcInsert insertAction;
 	private RowMapper<Product> rowMapper = BeanPropertyRowMapper.newInstance(Product.class);
 	private RowMapper<ProductImage> imgRowMapper = BeanPropertyRowMapper.newInstance(ProductImage.class);
 	private RowMapper<DisplayInfoImage> disImgRowMapper = BeanPropertyRowMapper.newInstance(DisplayInfoImage.class);
 	private RowMapper<ProductPrice> prodPriRowMapper = BeanPropertyRowMapper.newInstance(ProductPrice.class);
 	private RowMapper<ReservationUserComment> commentRowMapper = BeanPropertyRowMapper.newInstance(ReservationUserComment.class);
+	private RowMapper<ReservationInfo> reservationRowMapper = BeanPropertyRowMapper.newInstance(ReservationInfo.class);
+	private RowMapper<Price> priRowMapper =BeanPropertyRowMapper.newInstance(Price.class);
 	
 	public ProductDao(DataSource datasource) {
 		this.jdbc = new NamedParameterJdbcTemplate(datasource);
+		this.insertAction = new SimpleJdbcInsert(datasource).withTableName("reservation_info").usingGeneratedKeyColumns("id");
 	}
 
 	public List<Product> products(Integer start, Integer limit){
@@ -82,4 +91,6 @@ public class ProductDao {
 		Map<String,?> params = Collections.singletonMap("id",id);
 		return jdbc.queryForObject(SELECT_COMMENT_COUNT_BY_ID,params,Integer.class);
 	}
+	
+	
 }
