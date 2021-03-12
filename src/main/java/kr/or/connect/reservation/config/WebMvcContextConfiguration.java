@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -86,6 +88,15 @@ public class WebMvcContextConfiguration implements WebMvcConfigurer {
 		ApiInfo apiInfo = new ApiInfo("Swagger Sample","APIs Sample", "Sample Doc 0.1v","",contact,"This sentence will be diplay.","/");
 		return  apiInfo;
 	}
+	
+	
+	@Bean
+	public MultipartResolver multipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setMaxUploadSize(1024*1024*10);
+		return multipartResolver;
+	}
+	
 } 
  
 

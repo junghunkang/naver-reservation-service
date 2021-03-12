@@ -38,11 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	// 그 외의 요청은 모두 인증 후 접근 가능합니다.
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-				.authorizeRequests()
-				.anyRequest().permitAll()
-				.and().formLogin().loginPage("/members/loginform").usernameParameter("userId")
-				.passwordParameter("password").loginProcessingUrl("/authenticate");
+		http.csrf().disable();
+//				.authorizeRequests()
+//				.anyRequest().permitAll()
+//				.and().formLogin().loginPage("/members/loginform").usernameParameter("userId")
+//				.passwordParameter("password").loginProcessingUrl("/authenticate");
 	}
 
 	// 패스워드 인코더를 빈으로 등록합니다.
