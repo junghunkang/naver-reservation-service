@@ -13,16 +13,14 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @Configuration
 @EnableTransactionManagement
 public class DBConfig implements TransactionManagementConfigurer{
-	
+
+	// return되는 데이터 소스가 빈으로 등록된다.
 	private String driverClassName = "com.mysql.cj.jdbc.Driver";
-
 	private String url = "jdbc:mysql://localhost:3306/reservation?serverTimezone=UTC";
-
 	private String username = "root";
-
 	private String password = "rkdwjdgns1!";
-
 	
+
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
@@ -33,7 +31,6 @@ public class DBConfig implements TransactionManagementConfigurer{
 		return dataSource;
 	}
 
-	
 	@Override
 	public PlatformTransactionManager annotationDrivenTransactionManager() {
 		return transactionManger();

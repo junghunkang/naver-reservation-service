@@ -16,7 +16,7 @@ import kr.or.connect.reservation.service.security.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter{ //사용자 지정 보안 구성을 원할때 상속받아서 구현한다
 	
 	@Autowired
 	CustomUserDetailsService customUserDetailsService;
@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	
 	//AuthenticationFilter가 로그인을 처리해주는 팔터, 이때 해당 정보를 데이터베이스에서 읽어 올때 UserDailsSerive를 구현하는 객체를 사용한다.
+	//AuthenticationManager: 사용자 인증을 담당한다. -> 인증하는 객체를 재 정의한다.
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(customUserDetailsService);
